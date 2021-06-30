@@ -42,14 +42,11 @@ class CommunicationManager {
       return PresenceStates == DETECTED;
     }
 
-   /* void SendData {
+    void SendAlert {
       if (Serial.available()) {
-          Serial.print("character received: '");
-          Serial.print(char(number));
-          Serial.print("' -> ");
-          Serial.println(number, DEC);
+          Serial.print("Presence Detected'");
       }
-    } */ 
+    } 
 };
 
 CommunicationManager CommunicationManager;
