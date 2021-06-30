@@ -42,7 +42,7 @@ class CommunicationManager {
       return PresenceStates == DETECTED;
     }
 
-    void SendAlert {
+    void SendAlert(){
       if (Serial.available()) {
           Serial.print("Presence Detected'");
       }
