@@ -2,7 +2,54 @@ class CommunicationManager {
 
   private :
   public : 
-    void CommunicationManager_setup {
+    enum {DETECTED, NOTDETECTED} sensorStates;
+    /*sensorStates CurrentIRStates;
+    sensorStates CurrentSoundStates;
+    sensorStates PresenceStates;*/
+    byte CurrentIRStates = NOTDETECTED;
+    byte CurrentSoundStates = NOTDETECTED;
+    byte PresenceStates = NOTDETECTED;
+     
+    void CommunicationManager_setup() {
         Serial.begin(9600);
     }
-}
+
+    void UpdateStates() {
+        if(CurrentIRStates == DETECTED && CurrentSoundStates == DETECTED) {
+            PresenceStates = DETECTED;
+        } else {
+            PresenceStates = NOTDETECTED;
+        }
+    }
+
+
+    void ReadData() {
+      //Read IR Sensor data from raspy 
+       if (Serial.available()) {
+          
+          // 0 - Rien detecté 
+          // 1 - Objet detecté  
+          byte PresenceSensorState = Serial.read();
+          if (int(PresenceSensorState) == 1) {
+              CurrentIRStates = DETECTED;
+          } else {
+             CurrentIRStates = NOTDETECTED;
+          }
+        }
+    }
+
+    bool isAPresenceDetected(){
+      return PresenceStates == DETECTED;
+    }
+
+   /* void SendData {
+      if (Serial.available()) {
+          Serial.print("character received: '");
+          Serial.print(char(number));
+          Serial.print("' -> ");
+          Serial.println(number, DEC);
+      }
+    } */ 
+};
+
+CommunicationManager CommunicationManager;
