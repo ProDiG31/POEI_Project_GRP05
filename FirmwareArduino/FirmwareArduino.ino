@@ -37,8 +37,9 @@ void loop() {
 
   if (CommunicationManager.isAPresenceDetected()){
     LedManager.DetectPresence();
-    CommunicationManager.SendAlert();
   } else {
     LedManager.runChenillard();
   }
+
+  CommunicationManager.SendAlert();
 }
