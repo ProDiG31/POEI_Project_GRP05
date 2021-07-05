@@ -6,14 +6,10 @@
 
 
 void setup (){
-
- 
-  //Setup Led Manager
+  //Setup Manager
   LedManager.led_setup();
   CommunicationManager.CommunicationManager_setup(); 
-  SensorManager.sensor_setup();
-
-  
+  SensorManager.sensor_setup(); 
 }
 
 void loop() {
@@ -24,28 +20,34 @@ void loop() {
   //Update in Sensor Manager
   SensorManager.updateIRState(IRdata);
   SensorManager.updateSoundState();
+
+  //SensorManager.getStates()
   
-  switch SensorManager.getStates(); 
-    case 2: //isPresencedDetected
+  switch (SensorManager.getStates()){
+     case 2: //isPresencedDetected
       CommunicationManager.SendAlert();
-      
-      
+      break;
     case 1: //isSoundDetected
+      break;
     case 0:
     default:
+      break;
+  }
+
+  LedManager.update_led(SensorManager.getStates());
     
-  LedManager.DetectSound();
+  
   
   
   
 
   
-  
+  /*
   if (CommunicationManager.isAPresenceDetected()){
     LedManager.DetectPresence();
   } else {
     LedManager.runChenillard();
   }
 
-  CommunicationManager.SendAlert();
+  CommunicationManager.SendAlert();  */
 }

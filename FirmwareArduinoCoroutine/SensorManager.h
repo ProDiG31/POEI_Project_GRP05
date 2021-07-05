@@ -1,16 +1,12 @@
-#include <Arduino.h>
-#include <AceRoutine.h>
-using namespace ace_routine;
-
-class SensorManager: public Coroutine{
+class SensorManager{
   
   private : 
     // Sound sensor in
     int RECV_SOUND_PIN = 5; 
     
   public: 
-    bool CurrentIRStates = False;
-    bool CurrentSoundStates = False;
+    bool CurrentIRStates = false;
+    bool CurrentSoundStates = false;
      
     void sensor_setup() {
      //Setup Capteur Son
@@ -31,9 +27,9 @@ class SensorManager: public Coroutine{
 
     void updateIRState(int PresenceSensorState) {
       if (PresenceSensorState == 1) {
-         CurrentIRStates = True;
+         CurrentIRStates = true;
       } else {
-         CurrentIRStates = False;
+         CurrentIRStates = false;
       }
     }
 
